@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FakeDiscordMessages</title>
+  <meta property="og:title" content="Fake Discord Messages | A PingwinCo site."/>
+  <meta property="og:description" content="Create extremely realistic fake messages with this advanced tool."/>
+  <meta name="theme-color" content="#7289da">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ui">
+    <header>
+        <h1>Fake <span class="title">Discord</span> Messages V2</h1>
+        <p>/api/v1?id=....</p>
+    </header>
+
+    <section>
+        <h2>1. Input Data</h2>
+        <div class="inputs">
+            <div class="input">
+                <label for="uid">User ID:</label>
+                <input id="uid">
+            </div>
+            <div class="input">
+                <label for="col">Colour/Role Colour (HEX):</label>
+                <input id="col">
+            </div>
+            <div class="input">
+                <label for="time">Timestamp:</label>
+                <input id="time">
+            </div>
+            <div class="input">
+                <label for="content">Message Contents:</label>
+                <textarea id="content"></textarea>
+            </div>
+          <div class="slider-label">
+              Use Custom Username
+             <label class="switch">
+                <input type="checkbox" id="nickname">
+                <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="slider-label">
+            Use Role Icon
+            <label class="switch">
+              <input type="checkbox" id="roleicon">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <input type="file" id="selecticon" style="display: none;">
+
+          <div class="slider-label">
+            Make Mention-Yellow
+            <label class="switch">
+              <input type="checkbox" id="mentionyellow">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Look at preview</h2>
+        <div class="container" id="container">
+            <div class="data">
+                <img class="avatar" id="avatar" src="/assets/defaultprofile.png">
+                <div class="text-content">
+                    <div class="username-timestamp">
+                        <span class="username"><strong id="username">Example</strong></span>
+                        <span class="role-icon" id="role-icon"></span>
+                        <h6 class="timestamp" id="timestamp">Today at 00:00</h6>
+                    </div>
+                    <p class="message-content" id="message-content">This is a fake message content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Export!</h2>
+        <div class="button-group">
+            <button id="export">Export</button>
+        </div>
+    </section>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

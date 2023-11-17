@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+@font-face {
+  src: url("/assets/GG_Sans_regular.ttf");
+  font-family: GG Sans;
+}
+
+/* Page Styles */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0 0 2rem 0; 
+  font-family: "Roboto", sans-serif;
+  background-color: #202225;
+  color: #f6f6f6;
+}
+
+.ui {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 1rem;
+  border-radius: 15px;
+  background-color: #2c2f33;
+}
+
+h1, h2 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 2rem;
+  margin: 0.5rem 0;
+}
+
+.title {
+  color: #7289da;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+button, input[type="submit"] {
+  background-color: #7289da;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover, input[type="submit"]:hover {
+  background-color: #5a70bb;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input, textarea {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  border: 2px solid #40444b;
+  background-color: #40444b;
+  color: #f6f6f6;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  resize: vertical;
+  transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #7289da;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.slider-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #7289da;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Discord Message Styles */
+
+.container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  background-color: #313338;
+  padding: 10px;
+  position: relative;
+  padding-left: 60px;
+}
+
+.avatar {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.text-content {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.username {
+  font-family: GG Sans;
+  color: #F2F3F5;
+  margin-top: 0;
+  margin-bottom: 1px;
+  margin-right: 5px; 
+  line-height: 1.2;
+}
+
+.username-timestamp {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+}
+
+.timestamp {
+  font-family: GG Sans;
+  color: #949BA4;
+  font-size: 0.8em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.message-content {
+  word-wrap: break-word;
+  color: #DBDEE1;
+  font-family: GG Sans;
+  margin: 0px;
+  line-height: 1.2;
+}
+
+.role-icon {
+  display: none;
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+  margin-right: 5px; 
+}
+
+.ping, .channel-link {
+  background-color: #3C4270;
+  color: #C9CDFB;
+  padding: 0 3px;
+  border-radius: 3px;
+  opacity: 0.85;
+  font-weight: bold;
+}
+
+img.emoji {
+  vertical-align: top;
+  width: 20px;
+  height: 20px;
+  margin-right: 0.2em;
+  display: inline-block;
+}
+
+.mentioned {
+  background-color: rgba(68, 64, 55, 0.7);
+  position: relative;
+}
+
+.mentioned:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2.5px;
+  background-color: #F0B132;
+}
