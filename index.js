@@ -1,6 +1,7 @@
 import puppeteer from "puppeteer";
 import fetch from "node-fetch";
 import express from "express";
+import fs from "fs";
 const app = express();
 
 const port = process.env.PORT || 3000;
@@ -41,12 +42,11 @@ app.get("/api/v1/", async (req, res) => {
 
   const page = await browser.newPage();
 
-  await page.goto(`https://fakediscordmessages-v2.polish-penguin-dev.repl.co?content=${content}&timestamp=${timestamp}&color=${color}&username=${username}&avatar=${avatar}&roleicon=${roleicon}&mentionyellow=${mentionyellow}`);
+  await page.goto(`https://fakediscordmsgs.pingwinco.xyz?content=${content}&timestamp=${timestamp}&color=${color}&username=${username}&avatar=${avatar}&roleicon=${roleicon}&mentionyellow=${mentionyellow}`);
 
-  await page.waitForTimeout(50);
+  const message = await page.waitForSelector("#container");
 
-  const elementHandle = await page.$("#container");
-  const snapshot = await elementHandle.screenshot();
+  const snapshot = await message.screenshot();
 
   await browser.close();
 
