@@ -32,11 +32,9 @@ app.get("/api/v1/", async (req, res) => {
   const { content, timestamp, color, username, avatar, roleicon, mentionyellow } = req.query;
   
   const browser = await puppeteer.launch({
-    args: chromium.args,
-    defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath,
-    headless: chromium.headless,
-    ignoreHTTPSErrors: true
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    ignoreDefaultArgs: ["--disable-extensions"],
+    headless: true
   });
 
   const page = await browser.newPage();
