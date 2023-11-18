@@ -58,6 +58,36 @@ app.get("/api/v1/", async (req, res) => {
   console.log("Sent buffer to client!");
 });
 
+//V2 API uses post.
+app.post("/api/v2/", async (req, res) => {
+  const { content, timestamp, color, username, avatar, roleicon, mentionyellow } = req.body;
+  
+  const browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    ignoreDefaultArgs: ["--disable-extensions"],
+    headless: "new"
+  });
+
+  console.log("Puppeteer instance started!");
+
+  const page = await browser.newPage();
+
+  await page.goto(`https://fakediscordmsgs.pingwinco.xyz?content=${content}&timestamp=${timestamp}&color=${color}&username=${username}&avatar=${avatar}&roleicon=${roleicon}&mentionyellow=${mentionyellow}`);
+
+  const message = await page.waitForSelector("#container");
+
+  const snapshot = await message.screenshot();
+
+  await browser.close();
+
+  res.setHeader("Content-Type", "image/png");
+  res.setHeader("Content-Disposition", "inline; filename=snapshot.png");
+
+  res.send(snapshot);
+
+  console.log("Sent buffer to client!");
+});
+
 app.use(express.static(process.cwd() + "/src"));
 
 app.listen(port, "0.0.0.0", () => {
