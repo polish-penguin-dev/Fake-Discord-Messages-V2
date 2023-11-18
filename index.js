@@ -34,8 +34,10 @@ app.get("/api/v1/", async (req, res) => {
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
     ignoreDefaultArgs: ["--disable-extensions"],
-    headless: true
+    headless: "new"
   });
+
+  console.log("Puppeteer instance started!");
 
   const page = await browser.newPage();
 
@@ -48,12 +50,17 @@ app.get("/api/v1/", async (req, res) => {
 
   await browser.close();
 
+  res.setHeader("Content-Type", "image/png");
+  res.setHeader("Content-Disposition", "inline; filename=snapshot.png");
+
   res.send(snapshot);
+
+  console.log("Sent buffer to client!");
 });
 
 app.use(express.static(process.cwd() + "/src"));
 
 app.listen(port, "0.0.0.0", () => {
-  console.log("Listening on port 3000");
+  console.log(`Listening on port ${port}!`);
 });
 
