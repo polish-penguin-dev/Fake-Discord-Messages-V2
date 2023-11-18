@@ -3,6 +3,8 @@ import fetch from "node-fetch";
 import express from "express";
 const app = express();
 
+const port = process.env.PORT || 3000;
+
 app.get("/", (req, res) => {
   res.sendFile(process.cwd() + "/src/index.html");
 });
@@ -53,7 +55,7 @@ app.get("/api/v1/", async (req, res) => {
 
 app.use(express.static(process.cwd() + "/src"));
 
-app.listen(3000, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log("Listening on port 3000");
 });
 
