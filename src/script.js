@@ -161,5 +161,5 @@ function parseLines(input) {
     const params = getParams();
     const { content, timestamp, color, username, avatar, roleicon, mentionyellow } = params;
     
-    document.open(`/api/v1?content=${content}&timestamp=${timestamp}&color=${color}&username=${username}&avatar=${avatar}&roleicon=${roleicon}&mentionyellow=${mentionyellow}`, "_blank");   
+    document.location = `/api/v1?content=${content}&timestamp=${timestamp}&color=${color}&username=${username}&avatar=${avatar}&roleicon=${roleicon}&mentionyellow=${mentionyellow}`, "_blank";   
   });
