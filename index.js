@@ -1,4 +1,4 @@
-import chromium from "chrome-aws-lambda";
+import puppeteer from "puppeteer";
 import fetch from "node-fetch";
 import express from "express";
 const app = express();
@@ -29,7 +29,7 @@ app.get("/api/usrinfo/", async (req, res) => {
 app.get("/api/v1/", async (req, res) => {
   const { content, timestamp, color, username, avatar, roleicon, mentionyellow } = req.query;
   
-  const browser = await chromium.puppeteer.launch({
+  const browser = await puppeteer.launch({
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath,
@@ -57,4 +57,3 @@ app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
 
-module.exports = app;
