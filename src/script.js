@@ -1,5 +1,5 @@
-//Parse Message Content
-function parseLines(input) {
+  //Parse Message Content
+  function parseLines(input) {
     return input.split("\n").map(line => `<div>${line}</div>`).join("");
   }
   
@@ -163,3 +163,21 @@ function parseLines(input) {
     
     document.location = `/api/v1?content=${content}&timestamp=${timestamp}&color=${color}&username=${username}&avatar=${avatar}&roleicon=${roleicon}&mentionyellow=${mentionyellow}`, "_blank";   
   });
+
+  //Login
+  window.onload = () => {
+    const fragment = new URLSearchParams(window.location.hash.slice(1));
+    const [accessToken, tokenType] = [fragment.get("access_token"), fragment.get("token_type")];
+
+    if(!accessToken) {
+      return $("#login").html(`<a href="https://discord.com/api/oauth2/authorize?client_id=1154439405851910187&redirect_uri=https%3A%2F%2Ffakediscordmsgs.pingwinco.xyz%2F&response_type=code&scope=identify%20guilds%20guilds.members.read">Login with Discord</a>`)
+    }
+
+    fetch("https://discord.com/api/users/@me", {
+      headers: {
+        Authorization: `${tokenType} ${accessToken}`
+      }
+    }).then(response => response.json()).then(data => {
+      $("#login").text(`<p class="blue">Logged in as ${data.username}</p>`);
+    });
+  };
