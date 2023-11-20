@@ -69,7 +69,7 @@ const response = await fetch("https://fakediscordmsgs.pingwinco.xyz/api/v2", {
     })
 });
 
-const data = response.blob();
+const data = await response.blob();
 const url = window.URL.createObjectURL(new Blob([data]));
 
 console.log(url);
