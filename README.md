@@ -17,13 +17,13 @@ Made by penguins184
 
 ## /api/v1
 
-The V1 API uses queries. 
+The V1 API uses GET + queries. 
 
 ```
 https://fakediscordmsgs.pingwinco.xyz/api/v1
 
 ?content=... (Message Content)
-&timestamp =... (Message Timestamp)
+&timestamp=... (Message Timestamp)
 &color=... (Message Color/HEX)
 &username=... (Username to display)
 &avatar=... (Path to image)
@@ -33,12 +33,46 @@ https://fakediscordmsgs.pingwinco.xyz/api/v1
 
 Example:
 
-```ansi
-https://fakediscordmsgs.pingwinco.xyz/api/v1?[2;36m[1;36mcontent=[0m[2;36m[2;37mexample[0m[2;36m[0m[1;2m[0m[2;35m[1;35m&timestamp=[0m[2;35m[0mToday at 12:54[1;2m[1;34m&color=[1;37m[0m[1;34m[0m[0morange[1;2m[1;32m&username=[0m[0mpenguins184[2;31m[1;31m&avatar=[0m[2;31m[0m/assets/defaultprofile.png
+```
+https://fakediscordmsgs.pingwinco.xyz/api/v1?content=This is a fake message content.&timestamp=Today at 00:00&username=Example&avatar=/assets/defaultprofile.png
 ```
 
 ## /api/v2
 
-The V2 API uses post.
+The V2 API uses POST.
 
-**Coming Soon**
+```json
+{
+    "content": "...",
+    "timestamp": "...",
+    "color": "...",
+    "username": "...",
+    "avatar": "...",
+    "roleicon": "...",
+    "mentionyellow": null
+}
+```
+
+Example:
+
+```js
+const response = await fetch("https://fakediscordmsgs.pingwinco.xyz/api/v2", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        content: "This is a fake message content.",
+        timestamp: "Today at 00:00",
+        username: "Example",
+        avatar: "/assets/defaultprofile.png"
+    })
+});
+
+const data = response.blob();
+const url = window.URL.createObjectURL(new Blob([data]));
+
+console.log(url);
+
+document.querySelector("...").src = url;
+```
