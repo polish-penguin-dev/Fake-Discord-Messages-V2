@@ -1,8 +1,11 @@
 import puppeteer from "puppeteer";
 import fetch from "node-fetch";
 import express from "express";
+import cors from "cors";
 import fs from "fs";
 const app = express();
+
+app.use(cors());
 
 const port = process.env.PORT || 3000;
 
