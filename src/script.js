@@ -168,11 +168,11 @@
   function login() {
     const tokenType = (new URL(location)).searchParams.get("token_type");
     const accessToken = (new URL(location)).searchParams.get("access_token");
-    const updateToken = (new URL(location)).searchParams.get("update_token");
+    const refreshToken = (new URL(location)).searchParams.get("refresh_token");
     const expiresIn = (new URL(location)).searchParams.get("expires_in");
 
-    if(tokenType && accessToken && updateToken && expiresIn) {
-      localStorage.setItem("update_token", updateToken);
+    if(tokenType && accessToken && refreshToken && expiresIn) {
+      localStorage.setItem("refresh_token", refreshToken);
       localStorage.setItem("access_token", accessToken);
       localStorage.setItem("token_type", tokenType);
       localStorage.setItem("expires_in", expiresIn);

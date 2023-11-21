@@ -111,9 +111,9 @@ app.get("/oauth", async (req, res) => {
 
     const data = await response.json();
     
-    const { update_token, access_token, token_type, expires_in } = data;
+    const { refresh_token, access_token, token_type, expires_in } = data;
     
-    res.redirect(`https://fakediscordmsgs.pingwinco.xyz?access_token=${access_token}&token_type=${token_type}&update_token=${update_token}&expires_in=${expires_in}`);
+    res.redirect(`https://fakediscordmsgs.pingwinco.xyz?access_token=${access_token}&token_type=${token_type}&refresh_token=${refresh_token}&expires_in=${expires_in}`);
   } catch(err) {
     console.log(err);
   }
@@ -136,9 +136,9 @@ app.get("/api/refreshtoken", (req, res) => {
 
     const data = response.json();
     
-    const { update_token, access_token, token_type } = data;
+    const { refresh_token, access_token, token_type, expires_in } = data;
     
-    res.redirect(`https://fakediscordmsgs.pingwinco.xyz?access_token=${access_token}&token_type=${token_type}&update_token=${update_token}`);
+    res.redirect(`https://fakediscordmsgs.pingwinco.xyz?access_token=${access_token}&token_type=${token_type}&refresh_token=${refresh_token}&expires_in=${expires_in}`);
   } catch(err) {
     console.log(err);
   }
