@@ -168,14 +168,23 @@
   function login() {
     const tokenType = (new URL(location)).searchParams.get("token_type");
     const accessToken = (new URL(location)).searchParams.get("access_token");
-    
-    if(!accessToken) {
+    const updateToken = (new URL(location)).searchParams.get("update_token");
+    const expiresIn = (new URL(location)).searchParams.get("expires_in");
+
+    if(tokenType && accessToken && updateToken && expiresIn) {
+      localStorage.setItem("update_token", updateToken);
+      localStorage.setItem("access_token", accessToken);
+      localStorage.setItem("token_type", tokenType);
+      localStorage.setItem("expires_in", expiresIn);
+    }
+
+    if(!localStorage.getItem("access_token")) {
       return $("#login").html(`<a href="https://discord.com/api/oauth2/authorize?client_id=1154439405851910187&redirect_uri=https%3A%2F%2Ffakediscordmsgs.pingwinco.xyz%2Foauth&response_type=code&scope=identify%20guilds%20guilds.members.read">Login with Discord</a>`);
     }
 
     fetch("https://discord.com/api/users/@me", {
       headers: {
-        Authorization: `${tokenType} ${accessToken}`
+        Authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`
       }
     }).then(response => response.json()).then(data => {
       console.log(data);
