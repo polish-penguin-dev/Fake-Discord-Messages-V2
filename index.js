@@ -3,6 +3,7 @@ import fetch from "node-fetch";
 import express from "express";
 import cors from "cors";
 import fs from "fs";
+import { URL } from "url";
 const app = express();
 
 app.use(cors());
@@ -89,6 +90,33 @@ app.post("/api/v2/", async (req, res) => {
   res.send(snapshot);
 
   console.log("Sent buffer to client!");
+});
+
+//Discord OAuth
+app.get("/oauth", async (req, res) => {
+  const code = req.query.code;
+  const params = new URLSearchParams();
+
+  params.append("client_id", process.env.client_id);
+  params.append("client_secret", process.env.client_secret);
+  params.append("grant_type", "authorization_code");
+  params.append("code", code);
+  params.append("redirect_uri", "https://fakediscordmsgs.pingwinco.xyz/oauth");
+
+  try {
+    const response = await fetch("https://discord.com/api/oauth2/token", {
+      method: "POST",
+      body: params
+    });
+
+    const data = await response.json();
+    
+    const { access_token, token_type } = data;
+    
+    res.redirect(`https://fakediscordmsgs.pingwinco.xyz?access_token=${access_token}&token_type=${token_type}`);
+  } catch(err) {
+    console.log(err);
+  }
 });
 
 app.use(express.static(process.cwd() + "/src"));
