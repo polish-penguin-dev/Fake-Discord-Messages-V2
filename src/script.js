@@ -165,13 +165,13 @@
   });
 
   //Login
-  window.onload = () => {
+  function login() {
     const fragment = new URLSearchParams(window.location.hash.slice(1));
     const [accessToken, tokenType] = [fragment.get("access_token"), fragment.get("token_type")];
 
     console.log(`Access Token: ${accessToken}, Token Type: ${tokenType}`);
     if(!accessToken) {
-      return $("#login").html(`<a href="https://discord.com/api/oauth2/authorize?client_id=1154439405851910187&redirect_uri=https%3A%2F%2Ffakediscordmsgs.pingwinco.xyz%2F&response_type=code&scope=identify%20guilds%20guilds.members.read">Login with Discord</a>`)
+      return $("#login").html(`<a href="https://discord.com/api/oauth2/authorize?client_id=1154439405851910187&redirect_uri=https%3A%2F%2Ffakediscordmsgs.pingwinco.xyz%2F&response_type=code&scope=identify%20guilds%20guilds.members.read">Login with Discord</a>`);
     }
 
     fetch("https://discord.com/api/users/@me", {
@@ -182,4 +182,4 @@
       console.log(data);
       $("#login").html(`<p class="blue">Logged in as ${data.username}</p>`);
     });
-  };
+  }
