@@ -234,5 +234,21 @@
           }));
         });
       });
+
+      $("#servers").on("change", (e) => {
+        fetch(`https://discord.com/api/guilds/${e.target.value}/members`, {
+          headers: {
+            Authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`
+          }
+        }).then(response => response.json()).then(data => {
+          $("#users").empty();
+          data.forEach((item) => {
+            $("#users").append($("<option>", {
+              value: item.user.id,
+              text: item.user.username
+            }));
+          });
+        });
+      });
   }
   
