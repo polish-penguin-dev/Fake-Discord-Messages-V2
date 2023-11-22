@@ -188,7 +188,7 @@
       }
     }).then(response => response.json()).then(data => {
       console.log(data);
-      $("#login").html(`<p class="blue">Logged in as ${data.username}.</p> <a href="javascript:logout()">Logout</a>`);
+      $("#login").html(`<p class="blue">Logged in as ${data.username}. <a href="javascript:logout()">Logout</a></p>`);
     });
   }
 
@@ -227,7 +227,7 @@
           Authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`
         }
       }).then(response => response.json()).then(data => {
-        $.each(data, function(i, item) {
+        data.forEach((item) => {
           $("#select").append($("<option>", {
             value: item.id,
             text: item.name
