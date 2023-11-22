@@ -29,6 +29,7 @@ dialog {
   border-radius: 18px;
   border: 1px solid #fff;
   background-color: #2c2f33;
+  color: #f6f6f6;
   transition: all 1s;
 }
 
