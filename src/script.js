@@ -224,7 +224,7 @@
   if(!localStorage.getItem("access_token")) { $("#userpicker").addClass("disabled") };
 
   function selectUser() {
-    $("#select-user").showModal();
+    document.querySelector("#select-user").showModal();
 
     fetch("https://discord.com/api/users/@me/guilds", {
       headers: {
