@@ -227,12 +227,8 @@
           Authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`
         }
       }).then(response => response.json()).then(data => {
-        console.log(data);
-
         data.forEach((item) => {
-          console.log(item);
-          
-          $("#select").append($("<option>", {
+          $("#servers").append($("<option>", {
             value: item.id,
             text: item.name
           }));
