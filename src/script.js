@@ -188,8 +188,16 @@
       }
     }).then(response => response.json()).then(data => {
       console.log(data);
-      $("#login").html(`<p class="blue">Logged in as ${data.username}</p>`);
+      $("#login").html(`<p class="blue">Logged in as ${data.username}.</p> <a href="javascript:logout()">Logout</a>`);
     });
+  }
+
+  function logout() {
+    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("token_type");
+    localStorage.removeItem("expires_in");
+    document.location = "/", "_self";
   }
 
   async function tokenExpiration() {
@@ -211,3 +219,20 @@
 
   //If logged in, check if token is expired
   if(localStorage.getItem("access_token")) setInterval(tokenExpiration, 1000);
+
+  //User Select
+  if(localStorage.getItem("access_token")) {
+    fetch("https://discord.com/api/users/@me/guilds", {
+        headers: {
+          Authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`
+        }
+      }).then(response => response.json()).then(data => {
+        $.each(data, function(i, item) {
+          $("#select").append($("<option>", {
+            value: item.id,
+            text: item.name
+          }));
+        });
+      });
+  }
+  

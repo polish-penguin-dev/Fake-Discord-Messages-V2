@@ -25,6 +25,13 @@ html, body {
   background-color: #2c2f33;
 }
 
+dialog {
+  border-radius: 18px;
+  border: 1px solid #fff;
+  background-color: #2c2f33;
+  transition: all 1s;
+}
+
 h1, h2 {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
