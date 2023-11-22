@@ -191,3 +191,23 @@
       $("#login").html(`<p class="blue">Logged in as ${data.username}</p>`);
     });
   }
+
+  async function tokenExpiration() {
+    const expires_in = parseInt(localStorage.getItem("expires_in"), 10);
+    
+    const expiration_time = parseInt(Math.floor(Date.now() / 1000), 10) + expires_in;
+    const now = Math.floor(Date.now() / 1000);
+
+    if(now > expiration_time) {
+      const response = await fetch(`/api/refreshtoken?token=${localStorage.getItem("refresh_token")}`);
+      const data = await response.json();
+
+      localStorage.setItem("refresh_token", data.refresh_token);
+      localStorage.setItem("token_type", data.token_type);
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("expires_in", data.expires_in);
+    }
+  }
+
+  //If logged in, check if token is expired
+  if(localStorage.getItem("access_token")) setInterval(tokenExpiration, 1000);
