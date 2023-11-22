@@ -17,8 +17,10 @@
     </header>
 
     <dialog id="select-user">
-      <h1>User Select</h1>
+      <h1><u>User Select</u></h1>
+      <h1>Servers:</h1>
       <select id="servers"></select>
+      <h1>Users:</h1>
       <select id="users"></select>
     </dialog>
 
@@ -26,7 +28,7 @@
         <h2>1. Input Data</h2>
         <div class="inputs">
             <div class="input">
-                <label for="uid">User ID:</label>
+                <label for="uid">User ID: <a href="javascript:selectUser()" id="userpicker">User Picker</a></label>
                 <input id="uid">
             </div>
             <div class="input">

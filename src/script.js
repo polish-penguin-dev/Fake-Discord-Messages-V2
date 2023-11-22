@@ -221,34 +221,47 @@
   if(localStorage.getItem("access_token")) setInterval(tokenExpiration, 1000);
 
   //User Select
-  if(localStorage.getItem("access_token")) {
+  if(!localStorage.getItem("access_token")) { $("#userpicker").addClass("disabled") };
+
+  function selectUser() {
+    $("#select-user").showModal();
+
     fetch("https://discord.com/api/users/@me/guilds", {
+      headers: {
+        Authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`
+      }
+    }).then(response => response.json()).then(data => {
+      data.forEach((item) => {
+        $("#servers").append($("<option>", {
+          value: item.id,
+          text: item.name
+        }));
+      });
+    });
+
+    $("#servers").on("change", (e) => {
+      fetch(`https://discord.com/api/@me/guilds/${e.target.value}/members`, {
         headers: {
           Authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`
         }
       }).then(response => response.json()).then(data => {
+        $("#users").empty();
         data.forEach((item) => {
-          $("#servers").append($("<option>", {
-            value: item.id,
-            text: item.name
+          $("#users").append($("<option>", {
+            value: item.user.id,
+            text: item.user.username
           }));
         });
       });
+    });
 
-      $("#servers").on("change", (e) => {
-        fetch(`https://discord.com/api/guilds/${e.target.value}/members`, {
-          headers: {
-            Authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`
-          }
-        }).then(response => response.json()).then(data => {
-          $("#users").empty();
-          data.forEach((item) => {
-            $("#users").append($("<option>", {
-              value: item.user.id,
-              text: item.user.username
-            }));
-          });
-        });
-      });
+    $("#users").on("change", (e) => {
+      const id = e.target.value;
+      
+      $("#uid").val(id);
+      $("#uid").trigger("change");
+    });
   }
+
+
   
