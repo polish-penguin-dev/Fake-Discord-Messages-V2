@@ -240,7 +240,7 @@
     });
 
     $("#servers").on("change", (e) => {
-      fetch(`https://discord.com/api/@me/guilds/${e.target.value}/members`, {
+      fetch(`https://discord.com/api/v9/guilds/${e.target.value}/members`, {
         headers: {
           Authorization: `${localStorage.getItem("token_type")} ${localStorage.getItem("access_token")}`
         }
