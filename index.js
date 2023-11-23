@@ -92,58 +92,6 @@ app.post("/api/v2/", async (req, res) => {
   console.log("Sent buffer to client!");
 });
 
-//Discord OAuth
-app.get("/oauth", async (req, res) => {
-  const code = req.query.code;
-  const params = new URLSearchParams({
-    client_id: process.env.client_id,
-    client_secret: process.env.client_secret,
-    grant_type: "authorization_code",
-    code,
-    redirect_uri: "https://fakediscordmsgs.pingwinco.xyz/oauth"
-  });
-
-  try {
-    const response = await fetch("https://discord.com/api/oauth2/token", {
-      method: "POST",
-      body: params
-    });
-
-    const data = await response.json();
-    
-    const { refresh_token, access_token, token_type, expires_in } = data;
-    
-    res.redirect(`https://fakediscordmsgs.pingwinco.xyz?access_token=${access_token}&token_type=${token_type}&refresh_token=${refresh_token}&expires_in=${expires_in}`);
-  } catch(err) {
-    console.log(err);
-  }
-});
-
-app.get("/api/refreshtoken", (req, res) => {
-  const token = req.query.token;
-  const params = new URLSearchParams({
-    client_id: process.env.client_id,
-    client_secret: process.env.client_secret,
-    grant_type: "refresh_token",
-    refresh_token: token
-  });
-
-  try {
-    const response = fetch("https://discord.com/api/oauth2/token", {
-      method: "POST",
-      body: params
-    });
-
-    const data = response.json();
-    
-    const { refresh_token, access_token, token_type, expires_in } = data;
-    
-    res.redirect(`https://fakediscordmsgs.pingwinco.xyz?access_token=${access_token}&token_type=${token_type}&refresh_token=${refresh_token}&expires_in=${expires_in}`);
-  } catch(err) {
-    console.log(err);
-  }
-});
-
 app.use(express.static(process.cwd() + "/src"));
 
 app.listen(port, "0.0.0.0", () => {
